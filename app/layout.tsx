@@ -1,16 +1,16 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Nunito, Geist_Mono } from "next/font/google"
+import { Lexend, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
-const nunito = Nunito({ 
+const lexend = Lexend({ 
   subsets: ["latin"],
   display: 'swap',
   preload: true,
-  variable: '--font-geist',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-lexend',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 })
 const geistMono = Geist_Mono({ 
   subsets: ["latin"],
@@ -50,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${nunito.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className={`${lexend.variable} ${geistMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

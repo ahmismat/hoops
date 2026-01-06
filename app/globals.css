@@ -119,7 +119,7 @@
     @apply border-border outline-ring/50;
   }
   * {
-    font-family: var(--font-geist), 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--font-lexend), 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
   body {
