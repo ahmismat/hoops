@@ -1,13 +1,11 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card } from "@/components/ui/card"
 import { Phone, Mail, CheckCircle } from "lucide-react"
 import Navbar from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -21,12 +19,6 @@ export default function ContactPage() {
     subject: "",
     message: "",
   })
-  
-  const animationVariants = {
-    initial: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: prefersReducedMotion ? 0.2 : 0.6, ease: [0.22, 1, 0.36, 1] }
-  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,40 +28,70 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 relative">
+      {/* Background line animations */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03] dark:opacity-[0.05]">
+          <defs>
+            <pattern id="grid-contact" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" className="text-slate-900 dark:text-slate-100"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-contact)" />
+        </svg>
+      </div>
+
       <Navbar />
 
-      <section className="py-20 px-4 bg-[#0f172a] text-white">
-        <div className="container mx-auto text-center max-w-4xl">
-          <motion.div {...animationVariants} data-animate>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Contact Us</h1>
-            <p className="text-lg text-slate-300 leading-relaxed">Have questions? We'd love to hear from you.</p>
+      {/* Hero Section */}
+      <section className="pt-32 pb-24 px-6 bg-white dark:bg-slate-950 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center"
+          >
+            <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">
+              © Contact Us
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-slate-100 mb-8 leading-tight">
+              Contact Us
+            </h1>
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
+              Have questions? We'd love to hear from you.
+            </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-5xl">
+      {/* Contact Section */}
+      <section className="py-24 px-6 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 relative z-10">
+        <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12">
             <motion.div
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: prefersReducedMotion ? 0.2 : 0.6, ease: [0.22, 1, 0.36, 1] }}
-              data-animate
             >
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">Get in Touch</h2>
+              <div className="text-xs uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                01
+              </div>
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-8">
+                Get in Touch
+              </h2>
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#ff7200] rounded-full flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-slate-900 dark:bg-slate-100 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-white dark:text-slate-900" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500">Phone</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Phone</p>
                     <a
                       href="tel:8326796815"
-                      className="text-lg font-semibold text-slate-900 hover:text-[#ff7200] transition-colors duration-200"
+                      className="text-lg font-semibold text-slate-900 dark:text-slate-100 hover:opacity-70 transition-opacity"
                     >
                       832-679-6815
                     </a>
@@ -77,14 +99,14 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#ff7200] rounded-full flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-slate-900 dark:bg-slate-100 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-white dark:text-slate-900" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500">Email</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Email</p>
                     <a
                       href="mailto:hoops.program@gmail.com"
-                      className="text-lg font-semibold text-slate-900 hover:text-[#ff7200] transition-colors duration-200"
+                      className="text-lg font-semibold text-slate-900 dark:text-slate-100 hover:opacity-70 transition-opacity"
                     >
                       hoops.program@gmail.com
                     </a>
@@ -92,7 +114,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                 Whether you're a parent looking to enroll your child, a volunteer wanting to help, or just curious about
                 our program, we're here to answer your questions.
               </p>
@@ -103,21 +125,25 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: prefersReducedMotion ? 0.2 : 0.6, ease: [0.22, 1, 0.36, 1] }}
-              data-animate
             >
+              <div className="text-xs uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                02
+              </div>
               {submitted ? (
-                <Card className="p-8 text-center border-2 border-green-500">
-                  <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
-                  <p className="text-slate-600">
+                <div className="p-8 text-center border-2 border-slate-900 dark:border-slate-100 bg-white dark:bg-slate-950">
+                  <CheckCircle className="w-16 h-16 text-slate-900 dark:text-slate-100 mx-auto mb-4" />
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">
+                    Message Sent!
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400">
                     Your email client should have opened. If not, please email us directly at hoops.program@gmail.com
                   </p>
-                </Card>
+                </div>
               ) : (
-                <Card className="p-6 border border-slate-200">
+                <div className="p-6 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                         Name
                       </label>
                       <Input
@@ -132,7 +158,7 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                         Email
                       </label>
                       <Input
@@ -147,7 +173,7 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                         Subject
                       </label>
                       <Input
@@ -162,7 +188,7 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-1">
+                      <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                         Message
                       </label>
                       <Textarea
@@ -179,12 +205,12 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-[#ff7200] hover:bg-[#e66600] text-white font-semibold transition-colors"
+                      className="w-full bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-slate-200 text-white dark:text-slate-900 font-medium transition-colors"
                     >
                       Send Message
                     </Button>
                   </form>
-                </Card>
+                </div>
               )}
             </motion.div>
           </div>
