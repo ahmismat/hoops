@@ -1,11 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { useState, Suspense } from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { SkeletonImage } from "@/components/ui/skeleton"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -21,84 +17,47 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-slate-950">
+      <div className="container mx-auto px-8 py-6 flex items-center justify-between">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <Link href="/" className="flex items-center group">
-            <Suspense fallback={<SkeletonImage className="h-12 w-32" />}>
-              <motion.div
-                whileHover={{ opacity: 0.8 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Image 
-                  src="/hoops-logo-3d.png" 
-                  alt="HOOPS Logo" 
-                  width={200} 
-                  height={100} 
-                  className="h-12 w-auto" 
-                  priority 
-                />
-              </motion.div>
-            </Suspense>
+          <Link href="/" className="group">
+            <span className="text-seated-small text-slate-900 dark:text-slate-100 font-light">
+              H O O P S
+            </span>
           </Link>
         </motion.div>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-12">
           {navLinks.map((link, index) => (
             <motion.div
               key={link.href}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
             >
               <Link
                 href={link.href}
-                className="text-slate-900 dark:text-slate-100 hover:text-slate-600 dark:hover:text-slate-400 font-medium text-sm uppercase tracking-wider transition-colors duration-200 relative group"
+                className="text-slate-900 dark:text-slate-100 hover:opacity-60 font-light text-sm uppercase tracking-[0.2em] transition-opacity duration-200"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-px bg-slate-900 dark:bg-slate-100 transition-all duration-300 group-hover:w-full" />
               </Link>
             </motion.div>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <ThemeToggle />
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="md:hidden" 
+          <button
+            className="md:hidden text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] text-sm font-light"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <AnimatePresence mode="wait">
-              {mobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="h-5 w-5" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="h-5 w-5" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </Button>
+            {mobileMenuOpen ? 'close' : 'menu'}
+          </button>
         </div>
       </div>
 
@@ -108,20 +67,20 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4 }}
             className="md:hidden bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 overflow-hidden"
           >
-            <nav className="flex flex-col items-center gap-1 py-4">
+            <nav className="flex flex-col items-center gap-8 py-12">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.4 }}
                 >
                   <Link
                     href={link.href}
-                    className="text-slate-900 dark:text-slate-100 hover:text-slate-600 dark:hover:text-slate-400 font-medium text-sm uppercase tracking-wider transition-colors duration-200 px-6 py-3 block"
+                    className="text-slate-900 dark:text-slate-100 hover:opacity-60 font-light text-lg uppercase tracking-[0.2em] transition-opacity duration-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}

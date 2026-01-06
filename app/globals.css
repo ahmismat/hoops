@@ -122,14 +122,47 @@
     @apply bg-background text-foreground;
     transition: background-color 0.3s ease, color 0.3s ease;
     font-family: var(--font-geist), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.01em;
     font-feature-settings: 'kern' 1;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  
+  /* Seated.nyc Style Large Typography */
+  .text-seated {
+    font-size: clamp(3rem, 12vw, 12rem);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  
+  .text-seated-large {
+    font-size: clamp(4rem, 15vw, 18rem);
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+  
+  .text-seated-medium {
+    font-size: clamp(2rem, 6vw, 6rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
     line-height: 1.1;
+    text-transform: uppercase;
+  }
+  
+  .text-seated-small {
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
   
   /* Optimize animations for smooth performance */
@@ -165,11 +198,11 @@
   }
 }
 
-/* Professional Animations - Palmer Style */
+/* Seated.nyc Style Animations */
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -186,14 +219,14 @@
   }
 }
 
-@keyframes slide-in-right {
+@keyframes letter-reveal {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
@@ -203,47 +236,26 @@
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out;
+  animation: fade-in-up 0.8s ease-out;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.8s ease-out;
+  animation: fade-in 1s ease-out;
 }
 
-.animate-slide-in-right {
-  animation: slide-in-right 0.6s ease-out;
+.animate-letter-reveal {
+  animation: letter-reveal 0.6s ease-out;
 }
 
-/* Section Numbering Style */
-.section-number {
-  font-size: 0.75rem;
+/* Letter Spacing Utilities */
+.letter-spaced {
+  letter-spacing: 0.2em;
+}
+
+.letter-spaced-large {
+  letter-spacing: 0.3em;
+}
+
+.letter-spaced-small {
   letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.6;
-  font-weight: 500;
-}
-
-/* Typography Styles */
-.text-display {
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-
-.text-heading {
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-/* Clean Borders */
-.border-clean {
-  border-width: 1px;
-  border-color: oklch(0.9 0 0);
-}
-
-.dark .border-clean {
-  border-color: oklch(0.15 0 0);
 }
